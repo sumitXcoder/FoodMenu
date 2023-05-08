@@ -300,7 +300,7 @@ public class Main {
                         System.exit(0);
                     }
                 });
-                frame.addWindowListener(new WindowAdapter() {
+                billingFrame.addWindowListener(new WindowAdapter() {
                     public void windowClosing(WindowEvent e) {
                         System.exit(0);
                     }
