@@ -3,6 +3,7 @@ import java.awt.event.*;
 import java.util.List;
 import java.util.ArrayList;
 
+//Displaying Images by using Canvas
 class Photo extends Canvas {
     String name;
 
@@ -141,14 +142,14 @@ class BillRow extends Panel {
     static int netPayableAmount = 0;
 
     BillRow() {
-        Font headerFont = new Font("Monaco", Font.BOLD,17);
+        Font headerFont = new Font("Monaco", Font.BOLD, 17);
         Label[] labels = new Label[5];
         labels[0] = new Label("S.no");
         labels[1] = new Label("Food Item");
         labels[2] = new Label("Price");
         labels[3] = new Label("Quantity");
         labels[4] = new Label("Total Cost");
-        setLabels(labels,headerFont,0);
+        setLabels(labels, headerFont, 0);
     }
 
     BillRow(int sNo, String foodName, int foodPrice, int quantity) {
@@ -159,12 +160,12 @@ class BillRow extends Panel {
         labels[3] = new Label(Integer.toString(quantity));
         labels[4] = new Label(Integer.toString(foodPrice * quantity));
         netPayableAmount += foodPrice * quantity;
-        setLabels(labels, font,sNo);
+        setLabels(labels, font, sNo);
     }
 
     BillRow(int sNo) {
         Label amountToBePaid = new Label("Total Amount");
-        Label totalCost = new Label(Integer.toString(netPayableAmount)+" ₹");
+        Label totalCost = new Label(Integer.toString(netPayableAmount) + " ₹");
         amountToBePaid.setBounds(5, 5, 400, 35);
         totalCost.setBounds(410, 5, 165, 35);
         amountToBePaid.setFont(font);
@@ -175,12 +176,13 @@ class BillRow extends Panel {
         totalCost.setAlignment(Label.CENTER);
         totalCost.setBackground(Color.LIGHT_GRAY);
         add(totalCost);
-        setBounds(5, 105 + sNo* 30, 580, 45);
+        setBounds(5, 105 + sNo * 30, 580, 45);
         setLayout(null);
         setBackground(Color.DARK_GRAY);
     }
 
-    void setLabels(Label[] labels,Font font, int sNo) {
+    void setLabels(Label[] labels, Font font, int sNo) {
+        Color color = new Color(230, 230, 230);
         labels[0].setBounds(5, 5, 50, 25);
         labels[1].setBounds(60, 5, 200, 25);
         labels[2].setBounds(265, 5, 90, 25);
@@ -189,7 +191,10 @@ class BillRow extends Panel {
         for (Label label : labels) {
             label.setFont(font);
             label.setAlignment(Label.CENTER);
-            label.setBackground(Color.LIGHT_GRAY);
+            if (sNo > 0)
+                label.setBackground(color);
+            else
+                label.setBackground(Color.LIGHT_GRAY);
             add(label);
         }
         setBounds(5, 105 + sNo * 30, 580, 35);
@@ -216,30 +221,40 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        frame = new Frame("First Java Frame");
-        frame.setLayout(new FlowLayout(FlowLayout.LEFT));
+        frame = new Frame("ISTHARA RESTAURANT");
+        frame.setLayout(new BorderLayout());
+        Label welcome=new Label("       WELCOME TO ISTHARA RESTAURANT");
+        welcome.setFont(new Font("Monaco",Font.BOLD,50));
+        welcome.setBackground(new Color(255, 251, 145));
+        frame.add(welcome,BorderLayout.CENTER);
         List<FoodItem> tiffins = new ArrayList<>();
         List<FoodItem> meals = new ArrayList<>();
         List<FoodItem> curries = new ArrayList<>();
         List<FoodItem> desserts = new ArrayList<>();
+        List<FoodItem> drinks= new ArrayList<>();
         String[][] tiffinsData = {
                 { "Idli", "Dosa", "Vada", "Paratha", "Poha", "Upma", "Uttapam",
-                        "Pesarattu", "Oats" },
-                { "20", "35", "30", "20", "30", "20", "25", "40", "40", "45" }
+                        "Pesarattu", "Oats","Vermicelli Upma","Dhokla","Aloo Puri" },
+                { "20", "35", "30", "20", "30", "20", "25", "40", "40", "45","35","30","40" }
         };
         String[][] mealsData = { { "Veg Thali", "Plain Rice", "Fried Rice", "Aloo Paratha", "Paneer Paratha",
-                "Curd Rice", "Naan", "Rumaali Roti", "Tandoor Roti" },
-                { "150", "30", "75", "25", "35", "15", "20", "25", "20" } };
+                "Curd Rice", "Naan", "Rumaali Roti", "Tandoor Roti","Veg Biryani","Pulihora","Pakodi" },
+                { "120", "30", "75", "25", "35", "15", "20", "25", "20","150","30","30" } };
         String[][] curriesData = {
-                { "Aloo Curry", "Bendakay Fry", "Chole", "Kaju Masala", "Paneer Tikka", "Sambar", "Rasam" },
-                { "35", "30", "50", "60", "75", "15", "10" } };
+                { "Aloo Curry", "Bendakay Fry", "Chole", "Kaju Masala", "Paneer Tikka", "Sambar", "Rasam","Palak Paneer","Baingan Bharta","Rajma Masala","Malai Kofta","Chana Masala" },
+                { "35", "30", "50", "60", "75", "15", "10","60","40","50","70","40" } };
         String[][] dessertsData = { { "Double Ka Meetha", "Gulab Jamun", "Jalebi", "Kaja", "Malai Kulfi",
-                "Mango Ice-cream", "Rasmalai", "Vanilla Ice-cream" },
-                { "35", "30", "20", "20", "35", "40", "50", "30" } };
+                "Mango Ice-cream", "Rasmalai", "Vanilla Ice-cream","Besan Laddu","Gajar Ka Halwa","Rasgulla","Kaju Barfi" },
+                { "35", "30", "20", "20", "35", "40", "50", "30","30","35","25","40" } };
+        String[][] drinksData={{
+            "Badam Milk","Coffee","Falooda","Green Tea","Hot Chocolate","Lassi","Lemon Soda","Mango Juice","Masala Chai",
+            "MilkShake","Sugarcane Juice","Aam Panna"
+        },{"30","20","70","25","35","25","15","35","20","45","20","25"}};
         addFoodItemsToList(tiffins, tiffinsData);
         addFoodItemsToList(meals, mealsData);
         addFoodItemsToList(curries, curriesData);
         addFoodItemsToList(desserts, dessertsData);
+        addFoodItemsToList(drinks, drinksData);
         MenuBar menuBar = new MenuBar();
         Menu foodItemsMenu = new Menu("FOOD MENU");
         Menu show = new Menu("SHOW");
@@ -249,7 +264,8 @@ public class Main {
                 new MenuItem("Tiffins"),
                 new MenuItem("Meals"),
                 new MenuItem("Curries"),
-                new MenuItem("Desserts")
+                new MenuItem("Desserts"),
+                new MenuItem("Drinks")
         };
 
         menuBar.add(foodItemsMenu);
@@ -259,6 +275,7 @@ public class Main {
             foodItemsMenu.add(item);
             item.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
+                    frame.setLayout(new FlowLayout(FlowLayout.CENTER));
                     MenuItem menu = (MenuItem) e.getSource();
                     String currentItem = menu.getLabel();
                     frame.removeAll();
@@ -274,6 +291,9 @@ public class Main {
                             break;
                         case "Desserts":
                             addFoodItems(desserts);
+                            break;
+                        case "Drinks":
+                            addFoodItems(drinks);
                             break;
                     }
                     frame.revalidate();
@@ -297,7 +317,7 @@ public class Main {
                 billingFrame.setVisible(true);
                 billingFrame.addWindowListener(new WindowAdapter() {
                     public void windowClosing(WindowEvent e) {
-                        System.exit(0);
+                        billingFrame.dispose();
                     }
                 });
             }
