@@ -300,11 +300,6 @@ public class Main {
                         System.exit(0);
                     }
                 });
-                billingFrame.addWindowListener(new WindowAdapter() {
-                    public void windowClosing(WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
             }
         });
         frame.setBackground(new Color(100, 100, 100));
