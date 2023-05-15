@@ -402,7 +402,8 @@ public class Main {
                 // Creating new Bill Frame
                 Frame billingFrame = new Frame("BILL");
                 // Adding Header to the bill
-                billingFrame.add(new BillRow());
+                BillRow header = new BillRow();
+                billingFrame.add(header);
                 // Adding each food item in the static MY_ORDER List
                 for (MyOrder order : SelectedFoodItems.MY_ORDER) {
                     billingFrame.add(new BillRow(i, order.foodName, order.foodPrice, order.quantity));
