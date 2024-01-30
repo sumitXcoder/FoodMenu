@@ -290,7 +290,7 @@ public class Main {
         // Setting the details of the frame
         frame = new Frame("ISTHARA RESTAURANT");
         frame.setLayout(new BorderLayout());
-        Label welcome = new Label("       WELCOME TO ISTHARA RESTAURANT");
+        Label welcome = new Label("       WELCOME TO INDIAN RESTAURANT");
         welcome.setFont(new Font("Monaco", Font.BOLD, 50));
         welcome.setBackground(new Color(255, 251, 145));
         frame.add(welcome, BorderLayout.CENTER);
